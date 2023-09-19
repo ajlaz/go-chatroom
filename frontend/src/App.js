@@ -3,7 +3,7 @@ import "./App.css";
 import { connect, sendMsg } from "./api";
 import Header from './components/Header';
 import ChatHistory from "./components/ChatHistory";
-import { Chat } from "@material-ui/icons";
+import ChatInput from "./components/ChatInput";
 
 class App extends Component {
   constructor(props) {
@@ -24,9 +24,12 @@ class App extends Component {
   }
     
 
-  send() {
-    console.log("hello");
-    sendMsg("hello");
+  send(event) {
+    if(event.keyCode === 13){
+      console.log('enter pressed');
+      sendMsg(event.target.value);
+      event.target.value = "";
+    }
   }
 
   render() {
@@ -34,6 +37,7 @@ class App extends Component {
       <div className="App">
       <Header />
       <ChatHistory chatHistory={this.state.chatHistory} />
+      <ChatInput send={this.send}/>
         <button onClick={this.send}>Hit</button>
       </div>
     );
