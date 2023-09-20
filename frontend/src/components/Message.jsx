@@ -6,19 +6,21 @@ class Message extends Component {
         super(props);
         let temp = JSON.parse(this.props.message);
         this.state = {
-            message: temp
+            message: temp,
+            currentUser: this.props.currentUser
         };
     }
     render () {
-        const msg = this.state.message.body.split(": ");
+        const msg = this.state.message.body.split(":");
         const source = msg[0]
-        const body = msg[1]
+        const username = msg[1]
+        const body = msg[2]
         //{this.state.message.body}
         return (
         <div className='Message'>
             {msg.length > 1 ? 
             (<span>
-                <p className="username">{`${source}`}</p>
+                <p className={this.state.currentUser === source ? 'username me' : 'username'}>{`${username}`}</p>
                 <p className="body">{body}</p>
             </span>) 
             : (this.state.message.body)}

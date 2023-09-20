@@ -6,8 +6,11 @@ class Username extends Component {
         const username = this.props.username
         return (
             <div className="username">
-                <h2>Username: {username}</h2>
-                <input type="text" name="username" placeholder="Enter your username" onKeyDown={this.props.changeName}/>
+                <span>
+                    <h2>Username: {username}</h2>
+                    </span>
+                <input type="text" name="username" placeholder="Change username" onKeyDown={this.props.changeName}/>
+                <hr></hr>
             </div>
         )
     }

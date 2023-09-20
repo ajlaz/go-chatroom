@@ -5,13 +5,15 @@ import Header from './components/Header';
 import ChatHistory from "./components/ChatHistory";
 import ChatInput from "./components/ChatInput";
 import Username from "./components/Username";
+import { v4 as uuidv4 } from 'uuid';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "test",
-      chatHistory: []
+      chatHistory: [],
+      userId: uuidv4()
     };
   }
   componentDidMount() {
@@ -26,7 +28,7 @@ class App extends Component {
   }
   send = (event) => {
     if(event.keyCode === 13){
-      sendMsg(`${this.state?.username}: ${event.target.value}`);
+      sendMsg(`${this.state.userId}:${this.state.username}:${event.target.value}`);
       event.target.value = "";
     }
   }
@@ -43,7 +45,7 @@ class App extends Component {
       <div className="App">
       <Header />
       <Username username={this.state.username} changeName={this.changeName}/>
-      <ChatHistory chatHistory={this.state.chatHistory} />
+      <ChatHistory currentUser={this.state.userId} chatHistory={this.state.chatHistory} />
       <ChatInput send={this.send}/>
       </div>
     );

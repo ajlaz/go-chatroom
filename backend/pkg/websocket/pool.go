@@ -27,7 +27,7 @@ func (pool *Pool) Start() {
 			fmt.Println("Size of Connection Pool: ", len(pool.Clients))
 			for client := range pool.Clients {
 				fmt.Println("Client: " + client.ID + " joined")
-				client.Conn.WriteJSON(Message{Type: 1, Body: "New User Joined..."})
+				client.Conn.WriteJSON(Message{Type: 1, Body: "New User Joined"})
 			}
 			break
 		// If there is a client that has disconnected, remove it from the pool
@@ -35,7 +35,7 @@ func (pool *Pool) Start() {
 			delete(pool.Clients, client)
 			fmt.Println("Size of Connection Pool: ", len(pool.Clients))
 			for client := range pool.Clients {
-				client.Conn.WriteJSON(Message{Type: 1, Body: "User Disconnected..."})
+				client.Conn.WriteJSON(Message{Type: 1, Body: "User Disconnected"})
 			}
 			break
 		// If there is a new message, broadcast it to all clients in the pool
