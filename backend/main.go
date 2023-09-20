@@ -5,7 +5,10 @@ import (
 	"net/http"
 
 	"github.com/ajlaz/go-chatroom/pkg/websocket"
+	"github.com/google/uuid"
 )
+
+
 
 func serveWs(pool *websocket.Pool, w http.ResponseWriter, r *http.Request) {
 	fmt.Println("WebSocket Endpoint Hit")
@@ -17,6 +20,7 @@ func serveWs(pool *websocket.Pool, w http.ResponseWriter, r *http.Request) {
 	client := &websocket.Client{
 		Conn: conn,
 		Pool: pool,
+		ID:   uuid.New().String(),
 	}
 
 	pool.Register <- client

@@ -4,11 +4,13 @@ import { connect, sendMsg } from "./api";
 import Header from './components/Header';
 import ChatHistory from "./components/ChatHistory";
 import ChatInput from "./components/ChatInput";
+import Username from "./components/Username";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: "test",
       chatHistory: []
     };
   }
@@ -22,12 +24,16 @@ class App extends Component {
       console.log(this.state)
     });
   }
-    
-
-  send(event) {
+  send = (event) => {
     if(event.keyCode === 13){
-      console.log('enter pressed');
-      sendMsg(event.target.value);
+      sendMsg(`${this.state?.username}: ${event.target.value}`);
+      event.target.value = "";
+    }
+  }
+
+  changeName = (event) => {
+    if(event.keyCode === 13){
+      this.setState({username: event.target.value});
       event.target.value = "";
     }
   }
@@ -36,9 +42,9 @@ class App extends Component {
     return (
       <div className="App">
       <Header />
+      <Username username={this.state.username} changeName={this.changeName}/>
       <ChatHistory chatHistory={this.state.chatHistory} />
       <ChatInput send={this.send}/>
-        <button onClick={this.send}>Hit</button>
       </div>
     );
   }
