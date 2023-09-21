@@ -8,12 +8,14 @@ import Username from "./components/Username";
 import { v4 as uuidv4 } from 'uuid';
 
 class App extends Component {
+  
   constructor(props) {
+    const ID = uuidv4();
     super(props);
     this.state = {
-      username: "test",
+      username: ID,
       chatHistory: [],
-      userId: uuidv4()
+      userId: ID
     };
   }
   componentDidMount() {
@@ -43,10 +45,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <Header />
-      <Username username={this.state.username} changeName={this.changeName}/>
-      <ChatHistory currentUser={this.state.userId} chatHistory={this.state.chatHistory} />
-      <ChatInput send={this.send}/>
+        <Header />
+        <Username username={this.state.username} changeName={this.changeName}/>
+        <ChatHistory currentUser={this.state.userId} chatHistory={this.state.chatHistory} />
+        <ChatInput send={this.send}/>
       </div>
     );
   }
